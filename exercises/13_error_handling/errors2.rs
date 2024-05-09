@@ -21,14 +21,20 @@
 
 // I AM NOT DONE
 
+use core::num::dec2flt::parse::parse_number;
 use std::num::ParseIntError;
 
 pub fn total_cost(item_quantity: &str) -> Result<i32, ParseIntError> {
-    let processing_fee = 1;
-    let cost_per_item = 5;
-    let qty = item_quantity.parse::<i32>();
+    match item_quantity.parse::<i32>() {
+        Some(..) => {
+            let processing_fee = 1;
+            let cost_per_item = 5;
+            let qty = item_quantity.parse::<i32>().unwrap();
 
-    Ok(qty * cost_per_item + processing_fee)
+            Ok(qty * cost_per_item + processing_fee)
+        }
+        None => {Err(/* ParseIntError */)}
+    }
 }
 
 #[cfg(test)]
