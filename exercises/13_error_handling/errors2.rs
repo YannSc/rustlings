@@ -19,22 +19,18 @@
 // Execute `rustlings hint errors2` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
-
-use core::num::dec2flt::parse::parse_number;
 use std::num::ParseIntError;
 
 pub fn total_cost(item_quantity: &str) -> Result<i32, ParseIntError> {
-    match item_quantity.parse::<i32>() {
-        Some(..) => {
-            let processing_fee = 1;
-            let cost_per_item = 5;
-            let qty = item_quantity.parse::<i32>().unwrap();
+    let processing_fee = 1;
+    let cost_per_item = 5;
+    let qty = item_quantity.parse::<i32>();
+    let quantity_result = match qty {
+        Ok(qty) => qty * cost_per_item + processing_fee,
+        Err(err) => return Err(err),
 
-            Ok(qty * cost_per_item + processing_fee)
-        }
-        None => {Err(/* ParseIntError */)}
-    }
+    };
+    Ok(quantity_result)
 }
 
 #[cfg(test)]
